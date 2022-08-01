@@ -21,7 +21,7 @@ class FacturasProvider extends ChangeNotifier {
   }
 
   Future<List<Factura>> getFacturas() async {
-    var url = Uri.http(_baseUrl, 'api/facturas/findAll');
+    var url = Uri.http(_baseUrl, 'api/factura/findAll');
     var response = await http.get(url);
     List<dynamic> facturasList = json.decode(response.body);
     facturasList.forEach((factura) {
@@ -32,7 +32,7 @@ class FacturasProvider extends ChangeNotifier {
   }
 
   Future<Factura> getFactura() async {
-    var url = Uri.http(_baseUrl, 'api/facturas/1');
+    var url = Uri.http(_baseUrl, 'api/factura/1');
     var response = await http.get(url);
 
     Map<String, dynamic> facturaMap = json.decode(response.body);
