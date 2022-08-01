@@ -47,6 +47,10 @@ class HomeScreen extends StatelessWidget {
             separatorBuilder: (_, __) => const Divider(),
             itemCount: menuOptions.length),
       ),
+      body: const Image(
+        image: AssetImage('assets/images/factura1.jpg'),
+        alignment: AlignmentDirectional.bottomEnd,
+      ),
     );
   }
 }
