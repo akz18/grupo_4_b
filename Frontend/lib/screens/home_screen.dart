@@ -10,18 +10,43 @@ class HomeScreen extends StatelessWidget {
     final menuOptions = AppRoutes.menuOptions;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Página Principal')
-      ),
-      body: ListView.separated(
-          itemBuilder: (context, index) => ListTile(
-                leading: Icon(menuOptions[index].icon,color: AppTheme.primary),
-                title: Text(menuOptions[index].name),
-                onTap: () {
-                  Navigator.pushNamed(context, menuOptions[index].route);
-                },
+          centerTitle: true,
+          title: Stack(
+            children: <Widget>[
+              Text(
+                'Pagina Principal',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+                  foreground: Paint()
+                    ..style = PaintingStyle.stroke
+                    ..strokeWidth = 6
+                    ..color = Color.fromARGB(255, 39, 37, 37),
+                ),
               ),
-          separatorBuilder: (_, __) => const Divider(),
-          itemCount: menuOptions.length),
+              const Text(
+                'Pagina Principal',
+                textAlign: TextAlign.center,
+                style: TextStyle(
+                  fontSize: 40,
+                  color: Color.fromARGB(255, 255, 255, 255),
+                ),
+              ),
+            ],
+          )),
+      drawer: Drawer(
+        child: ListView.separated(
+            itemBuilder: (context, index) => ListTile(
+                  leading: Icon(menuOptions[index].icon,
+                      color: Color.fromARGB(255, 216, 250, 27)),
+                  title: Text(menuOptions[index].name),
+                  onTap: () {
+                    Navigator.pushNamed(context, menuOptions[index].route);
+                  },
+                ),
+            separatorBuilder: (_, __) => const Divider(),
+            itemCount: menuOptions.length),
+      ),
     );
   }
 }
