@@ -19,7 +19,7 @@ class Factura {
     String producto;
     double precio;
     int cantidad;
-    String archivado;
+    bool archivado;
     String? firma;
     double total;
 
