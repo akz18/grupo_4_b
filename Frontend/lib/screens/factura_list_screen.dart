@@ -35,8 +35,9 @@ class FacturaListScreen extends StatelessWidget {
                   Container(
                     padding: EdgeInsets.only(right: 15, top: 10),
                     alignment: AlignmentDirectional.topEnd,
-                    child:
-                        Text(facturaProvider.facturas[index].fecha.toString()),
+                    child: Text(
+                        facturaProvider.facturas[index].fecha.toString(),
+                        style: TextStyle(color: Colors.black, fontSize: 15.0)),
                   ),
                   Card(
                     color: Color.fromARGB(255, 225, 235, 235),
@@ -65,13 +66,15 @@ class FacturaListScreen extends StatelessWidget {
                           children: [
                             Text(
                               "Cantidad: ",
-                              style: TextStyle(fontSize: 15.0),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0),
                             ),
                             Text(
                               textAlign: TextAlign.end,
                               facturaProvider.facturas[index].cantidad
                                   .toString(),
-                              style: TextStyle(fontSize: 15.0),
+                              style: TextStyle(
+                                  color: Colors.black, fontSize: 15.0),
                             )
                           ],
                         ),
@@ -100,11 +103,11 @@ class FacturaListScreen extends StatelessWidget {
                       onPressed: () => null,
                       child: Text(
                         "Visualizar",
-                        style: TextStyle(color: Colors.white, fontSize: 20.0),
+                        style: TextStyle(color: Colors.black, fontSize: 20.0),
                       ),
                       style: ButtonStyle(
-                        backgroundColor:
-                            MaterialStateProperty.all<Color>(Colors.indigo),
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 216, 250, 27)),
                       )),
                 ]),
               ),
