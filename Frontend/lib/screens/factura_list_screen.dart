@@ -13,7 +13,7 @@ class FacturaListScreen extends StatelessWidget {
     print(facturaProvider.facturas[0].producto);
     return Scaffold(
       appBar: AppBar(
-        title: const Text('User List'),
+        title: const Text('Factura List'),
       ),
       body: ListView.separated(
           itemBuilder: (context, index) => ListTile(
