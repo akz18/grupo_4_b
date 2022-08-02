@@ -51,6 +51,26 @@ class HomeScreen extends StatelessWidget {
         image: AssetImage('assets/images/factura1.jpg'),
         alignment: AlignmentDirectional.bottomEnd,
       ),
+      bottomNavigationBar: BottomNavigationBar(
+        backgroundColor:  Color.fromARGB(255, 216, 250, 27),
+        selectedItemColor: Color.fromARGB(255, 0, 0, 0),
+        unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.home),
+            label: 'Home',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.account_circle_sharp),
+            label: 'Business',
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.settings),
+            label: 'School',          
+          ),
+          
+        ],
+      ),
     );
   }
 }
