@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
           title: Stack(
             children: <Widget>[
               Text(
-                'Pagina Principal',
+                'Home Page Factura',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
@@ -25,7 +25,7 @@ class HomeScreen extends StatelessWidget {
                 ),
               ),
               const Text(
-                'Pagina Principal',
+                'Home Page Factura',
                 textAlign: TextAlign.center,
                 style: TextStyle(
                   fontSize: 40,
@@ -44,17 +44,29 @@ class HomeScreen extends StatelessWidget {
                     Navigator.pushNamed(context, menuOptions[index].route);
                   },
                 ),
+                
             separatorBuilder: (_, __) => const Divider(),
             itemCount: menuOptions.length),
       ),
-      body: const Image(
-        image: AssetImage('assets/images/factura1.jpg'),
-        alignment: AlignmentDirectional.bottomEnd,
-      ),
+      body:
+       GridView.count(
+          // Create a grid with 2 columns. If you change the scrollDirection to
+          // horizontal, this produces 2 rows.
+          crossAxisCount: 2,
+          // Generate 100 widgets that display their index in the List.
+          children: List.generate(100, (index) {
+            return const Center(
+              child: Image(
+                      image: AssetImage('assets/images/factura1.jpg'),
+                      alignment: AlignmentDirectional.bottomEnd,
+                    ),
+            );
+          }),
+        ),
       bottomNavigationBar: BottomNavigationBar(
-        backgroundColor:  Color.fromARGB(255, 216, 250, 27),
-        selectedItemColor: Color.fromARGB(255, 0, 0, 0),
-        unselectedItemColor: Color.fromARGB(255, 0, 0, 0),
+        backgroundColor:  const Color.fromARGB(255, 216, 250, 27),
+        selectedItemColor: const Color.fromARGB(255, 0, 0, 0),
+        unselectedItemColor: const Color.fromARGB(255, 0, 0, 0),
         items: const <BottomNavigationBarItem>[
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -67,8 +79,7 @@ class HomeScreen extends StatelessWidget {
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
             label: 'School',          
-          ),
-          
+          ), 
         ],
       ),
     );
