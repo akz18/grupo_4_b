@@ -74,11 +74,11 @@ class HomeScreen extends StatelessWidget {
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.account_circle_sharp),
-            label: 'Business',
+            label: 'Cuenta',
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.settings),
-            label: 'School',          
+            label: 'Ajustes',          
           ), 
         ],
       ),
