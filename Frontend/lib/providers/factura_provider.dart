@@ -7,21 +7,23 @@ class FacturasProvider extends ChangeNotifier {
   final String _baseUrl = 'localhost:8080';
   final List<Factura> facturas = [];
   Factura factura = Factura(
-    fecha: DateTime(0),
+    // fecha: DateTime(0),
     cliente: '',
     producto: '',
-    precio: 0,
-    cantidad: 0,
+    //precio: 0,
+    //cantidad: 0,
     archivado: true,
-    total: 0,
+    //total: 0,
   );
+
+  late Factura selectedFactura;
 
   FacturasProvider() {
     getFacturas();
   }
 
   Future<List<Factura>> getFacturas() async {
-    var url = Uri.http(_baseUrl, 'api/factura/findAll');
+    var url = Uri.http(_baseUrl, '/api/factura/findAll');
     var response = await http.get(url);
     List<dynamic> facturasList = json.decode(response.body);
     facturasList.forEach((factura) {
@@ -32,12 +34,12 @@ class FacturasProvider extends ChangeNotifier {
   }
 
   Future<Factura> getFactura() async {
-    var url = Uri.http(_baseUrl, 'api/factura/1');
+    var url = Uri.http(_baseUrl, '/api/factura/1');
     var response = await http.get(url);
 
     Map<String, dynamic> facturaMap = json.decode(response.body);
 
-    factura.fecha = facturaMap['fecha'];
+    //factura.fecha = facturaMap['fecha'];
     factura.cliente = facturaMap['cliente'];
     factura.producto = facturaMap['producto'];
     factura.precio = facturaMap['precio'];
@@ -55,9 +57,21 @@ class FacturasProvider extends ChangeNotifier {
     return factura;
   }
 
-  createFactura() {}
+  createFactura(Factura factura) {}
 
-  updateFactura() {}
+  updateFactura(Factura factura) async {
+    final url = Uri.http(_baseUrl, '/api/factura/update');
+    final response = await http.put(url, body: factura.toJson());
+    print(factura.toJson());
+  }
 
-  deleteFactura() {}
+  deleteUser() {}
+
+  Future saveOrUpdate(Factura factura) async {
+    if (factura.id == null) {
+      createFactura(factura);
+    } else {
+      updateFactura(factura);
+    }
+  }
 }

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:grupo_4_b/models/menu_option.dart';
-import 'package:grupo_4_b/screens/factura_list_screen.dart';
-import 'package:grupo_4_b/screens/home_screen.dart';
+import 'package:grupo_4_b/screens/screens.dart';
 
 class AppRoutes {
   static const initialRoute = 'home';
@@ -17,6 +16,11 @@ class AppRoutes {
         icon: Icons.list,
         name: 'Factura List',
         screen: const FacturaListScreen()),
+    MenuOption(
+        route: 'factura-form',
+        icon: Icons.list,
+        name: 'Factura Form',
+        screen: const FacturaFormScreen()),
   ];
 
   static Map<String, Widget Function(BuildContext)> getAppRoutes() {
