@@ -52,16 +52,14 @@ class FacturaFormScreenBody extends StatelessWidget {
             child: Form(
               child: Column(children: [
                 DateInputField(
-                initialValue: factura.fecha.toString(),
-                formProperty: 'fecha',
-                formValues: myFormValues,
-                labelText: 'Fecha',
-                autofocus: true,
-                suffixIcon: Icons.date_range,
-                keyboardType: TextInputType.datetime,
-                tipoRespuesta: 'datetime'
-                ),
-
+                    initialValue: factura.fecha.toString(),
+                    formProperty: 'fecha',
+                    formValues: myFormValues,
+                    labelText: 'Fecha',
+                    autofocus: true,
+                    suffixIcon: Icons.date_range,
+                    keyboardType: TextInputType.datetime,
+                    tipoRespuesta: 'datetime'),
                 CustomInputField(
                     initialValue: factura.cliente,
                     formProperty: 'cliente',
@@ -103,7 +101,6 @@ class FacturaFormScreenBody extends StatelessWidget {
                   labelText: 'Firma',
                   suffixIcon: Icons.confirmation_number,
                 ),
-
                 CustomInputField(
                   initialValue: factura.total.toString(),
                   formProperty: 'total',
@@ -114,23 +111,35 @@ class FacturaFormScreenBody extends StatelessWidget {
                   tipoRespuesta: 'double',
                 ),
                 Container(
-                  margin: EdgeInsets.only(top: 10,bottom:10,left: 20, right: 20),
-                  width: 330,
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(15),
-                    border: Border.all(color: Colors.white, width: 3)
-                  ),
-                  child: DropdownButtonFormField<bool>(
-                      items: const [
-                        DropdownMenuItem(value: true, child: Text('SI')),
-                        DropdownMenuItem(value: false, child: Text('NO')),
+                    margin: EdgeInsets.only(
+                        top: 10, bottom: 10, left: 20, right: 20),
+                    width: 200,
+                    height: 75,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(15),
+                        border: Border.all(color: Colors.white, width: 3)),
+                    child: Column(
+                      children: [
+                        const Text("Archivado", style: TextStyle(fontSize: 15)),
+                        DropdownButtonFormField<bool>(
+                            items: const [
+                              DropdownMenuItem(
+                                  value: true,
+                                  child: Text(
+                                    'SI',
+                                  )),
+                              DropdownMenuItem(
+                                  value: false,
+                                  child: Text(
+                                    'NO',
+                                  )),
+                            ],
+                            onChanged: (value) {
+                              myFormValues['archivado'] = value;
+                              print(value);
+                            }),
                       ],
-                      onChanged: (value) {
-                        myFormValues['archivado'] = value;
-                        print(value);
-                      }),
-                ),
-
+                    )),
                 ElevatedButton.icon(
                   onPressed: () {
                     factura.id = myFormValues['id'] ?? '';
@@ -147,9 +156,14 @@ class FacturaFormScreenBody extends StatelessWidget {
                     Navigator.pushNamed(context, 'factura-list');
                   },
                   icon: const Icon(Icons.save, color: Colors.black),
-                  label: const Text('Guardar' , style: TextStyle(color: Colors.black),),
-                  
-                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 216, 250, 27)),),
+                  label: const Text(
+                    'Guardar',
+                    style: TextStyle(color: Colors.black),
+                  ),
+                  style: ButtonStyle(
+                    backgroundColor: MaterialStateProperty.all(
+                        Color.fromARGB(255, 216, 250, 27)),
+                  ),
                 )
               ]),
             ),
