@@ -7,7 +7,7 @@ class FacturasProvider extends ChangeNotifier {
   final String _baseUrl = 'localhost:8080';
   final List<Factura> facturas = [];
   Factura factura = Factura(
-    // fecha: DateTime(0),
+    fecha: DateTime.now(),
     cliente: '',
     producto: '',
     precio: 0,

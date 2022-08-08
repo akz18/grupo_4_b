@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grupo_4_b/themes/theme.dart';
 
-class CustomInputField extends StatelessWidget {
+class DateInputField extends StatelessWidget {
   final bool? autofocus;
   final TextInputType? keyboardType;
   final bool? obscureText;
@@ -15,7 +15,7 @@ class CustomInputField extends StatelessWidget {
   final String? initialValue;
   final String? tipoRespuesta;
 
-  const CustomInputField({
+  const DateInputField({
     Key? key,
     this.autofocus,
     this.keyboardType,
@@ -33,6 +33,7 @@ class CustomInputField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     return TextFormField(
       autofocus: autofocus ?? false,
       keyboardType: keyboardType,
@@ -40,19 +41,11 @@ class CustomInputField extends StatelessWidget {
       initialValue: initialValue,
       textCapitalization: TextCapitalization.words,
       onChanged: (value)  {
-        if (tipoRespuesta == 'int'){
-           formValues[formProperty] = int.parse(value);
-        }
-        if (tipoRespuesta == 'double'){
-           formValues[formProperty] = double.parse(value);
-        }
         if (tipoRespuesta == 'datetime'){
            formValues[formProperty] = DateTime.parse(value);
            print(formValues[formProperty]);
         }
-        if(tipoRespuesta ==null){
-           formValues[formProperty] = value;
-        }
+        
        },
       validator: (value) {
         if (value == null) {
@@ -67,9 +60,27 @@ class CustomInputField extends StatelessWidget {
         hintText: hintText,
         labelText: labelText,
         helperText: helperText,
-        suffixIcon: Icon(
-          suffixIcon,
-          color: AppTheme.primary,
+        suffixIcon: IconButton(
+          icon: Icon(suffixIcon),
+          onPressed: () async {
+            DateTime? newDate = await showDatePicker(
+              context: context, 
+              initialDate: formValues[formProperty], 
+              firstDate: DateTime(2000), 
+              lastDate: DateTime(2100));
+
+            if(newDate == null) return;
+            
+              print(newDate);
+              
+              formValues[formProperty]=newDate;
+
+              
+            
+
+          },
+          
+          // color: AppTheme.primary,
         ),
         // prefixIcon: Icon(Icons.supervised_user_circle_rounded),
         icon: Icon(

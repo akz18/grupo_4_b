@@ -30,7 +30,7 @@ class FacturaFormScreenBody extends StatelessWidget {
     final facturaFormProvider = Provider.of<FacturaFormProvider>(context);
     final factura = facturaFormProvider.factura;
     final Map<String, dynamic> myFormValues = {
-      //'fecha': factura.fecha.toString(),
+      'fecha': factura.fecha,
       'id': factura.id,
       'cliente': factura.cliente,
       'producto': factura.producto,
@@ -51,13 +51,16 @@ class FacturaFormScreenBody extends StatelessWidget {
             key: facturaFormProvider.formKey,
             child: Form(
               child: Column(children: [
-                //CustomInputField(
-                //initialValue: factura.fecha.toString(),
-                //formProperty: 'fecha',
-                //formValues: myFormValues,
-                //labelText: 'Fecha',
-                //autofocus: true,
-                //suffixIcon: Icons.date_range),
+                DateInputField(
+                initialValue: factura.fecha.toString(),
+                formProperty: 'fecha',
+                formValues: myFormValues,
+                labelText: 'Fecha',
+                autofocus: true,
+                suffixIcon: Icons.date_range,
+                keyboardType: TextInputType.datetime,
+                tipoRespuesta: 'datetime'
+                ),
 
                 CustomInputField(
                     initialValue: factura.cliente,
@@ -110,19 +113,28 @@ class FacturaFormScreenBody extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   tipoRespuesta: 'double',
                 ),
-                DropdownButtonFormField<bool>(
-                    items: const [
-                      DropdownMenuItem(value: true, child: Text('SI')),
-                      DropdownMenuItem(value: false, child: Text('NO')),
-                    ],
-                    onChanged: (value) {
-                      myFormValues['archivado'] = value;
-                      print(value);
-                    }),
+                Container(
+                  margin: EdgeInsets.only(top: 10,bottom:10,left: 20, right: 20),
+                  width: 330,
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(15),
+                    border: Border.all(color: Colors.white, width: 3)
+                  ),
+                  child: DropdownButtonFormField<bool>(
+                      items: const [
+                        DropdownMenuItem(value: true, child: Text('SI')),
+                        DropdownMenuItem(value: false, child: Text('NO')),
+                      ],
+                      onChanged: (value) {
+                        myFormValues['archivado'] = value;
+                        print(value);
+                      }),
+                ),
 
                 ElevatedButton.icon(
                   onPressed: () {
                     factura.id = myFormValues['id'] ?? '';
+                    factura.fecha = myFormValues['fecha'] ?? DateTime.now();
                     factura.cliente = myFormValues['cliente'] ?? '';
                     factura.producto = myFormValues['producto'] ?? '';
                     factura.precio = myFormValues['precio'] ?? 0;
@@ -134,8 +146,10 @@ class FacturaFormScreenBody extends StatelessWidget {
                     print(factura.id);
                     Navigator.pushNamed(context, 'factura-list');
                   },
-                  icon: const Icon(Icons.save),
-                  label: const Text('Guardar'),
+                  icon: const Icon(Icons.save, color: Colors.black),
+                  label: const Text('Guardar' , style: TextStyle(color: Colors.black),),
+                  
+                  style: ButtonStyle(backgroundColor: MaterialStateProperty.all(Color.fromARGB(255, 216, 250, 27)),),
                 )
               ]),
             ),

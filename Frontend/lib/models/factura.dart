@@ -3,7 +3,7 @@ import 'dart:convert';
 class Factura {
   Factura({
     this.id,
-    //this.fecha,
+    required this.fecha,
     required this.cliente,
     required this.producto,
     this.precio,
@@ -14,7 +14,7 @@ class Factura {
   });
 
   int? id;
-  //DateTime? fecha;
+  DateTime fecha;
   String cliente;
   String producto;
   double? precio;
@@ -29,7 +29,7 @@ class Factura {
 
   factory Factura.fromMap(Map<String, dynamic> json) => Factura(
         id: json["id"],
-        //fecha: DateTime.parse(json["fecha"]),
+        fecha: DateTime.parse(json["fecha"]),
         //fecha: json["fecha"],
         cliente: json["cliente"],
         producto: json["producto"],
@@ -42,8 +42,7 @@ class Factura {
 
   Map<String, dynamic> toMap() => {
         "id": id,
-        //"fecha":
-        //"${fecha.year.toString().padLeft(4, '0')}-${fecha.month.toString().padLeft(2, '0')}-${fecha.day.toString().padLeft(2, '0')}",
+        "fecha": "${fecha.year.toString().padLeft(4, '0')}-${fecha.month.toString().padLeft(2, '0')}-${fecha.day.toString().padLeft(2, '0')}",
         //"fecha": fecha,
         "cliente": cliente,
         "producto": producto,

@@ -27,10 +27,10 @@ class FacturaListScreen extends StatelessWidget {
                   Container(
                     padding: const EdgeInsets.only(right: 15, top: 10),
                     alignment: AlignmentDirectional.topEnd,
-                    // child: Text(
-                    // facturaProvider.facturas[index].fecha.toString(),
-                    // style: const TextStyle(
-                    //  color: Colors.black, fontSize: 15.0)),
+                    child: Text(
+                    facturaProvider.facturas[index].fecha.toString(),
+                    style: const TextStyle(
+                     color: Colors.black, fontSize: 15.0)),
                   ),
                   Card(
                     color: const Color.fromARGB(255, 225, 235, 235),
