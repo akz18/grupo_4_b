@@ -51,15 +51,7 @@ class FacturaFormScreenBody extends StatelessWidget {
             key: facturaFormProvider.formKey,
             child: Form(
               child: Column(children: [
-                DateInputField(
-                    initialValue: factura.fecha.toString(),
-                    formProperty: 'fecha',
-                    formValues: myFormValues,
-                    labelText: 'Fecha',
-                    autofocus: true,
-                    suffixIcon: Icons.date_range,
-                    keyboardType: TextInputType.datetime,
-                    tipoRespuesta: 'datetime'),
+                
                 CustomInputField(
                     initialValue: factura.cliente,
                     formProperty: 'cliente',
@@ -101,6 +93,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                   labelText: 'Firma',
                   suffixIcon: Icons.confirmation_number,
                 ),
+                
                 CustomInputField(
                   initialValue: factura.total.toString(),
                   formProperty: 'total',
@@ -110,6 +103,11 @@ class FacturaFormScreenBody extends StatelessWidget {
                   keyboardType: TextInputType.number,
                   tipoRespuesta: 'double',
                 ),
+                DateInputField(
+                    formProperty: 'fecha',
+                    formValues: myFormValues,
+                    suffixIcon: Icons.date_range,
+                    ),
                 Container(
                     margin: EdgeInsets.only(
                         top: 10, bottom: 10, left: 20, right: 20),
