@@ -88,8 +88,8 @@ class FacturaListScreen extends StatelessWidget {
                               TextStyle(color: Colors.indigo, fontSize: 15.0),
                         ),
                         Text(
-                          "USD  " +
-                              facturaProvider.facturas[index].precio.toString(),
+                          "USD ${facturaProvider.facturas[index].total} " ,
+                              
                           style: const TextStyle(
                               color: Colors.black, fontSize: 15.0),
                         )

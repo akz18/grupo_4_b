@@ -11,7 +11,7 @@ class FacturaFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
     final facturasProvider = Provider.of<FacturasProvider>(context);
-
+    print('hellow soy r');
     return ChangeNotifierProvider(
       create: (_) => FacturaFormProvider(facturasProvider.selectedFactura),
       child: FacturaFormScreenBody(
@@ -28,6 +28,7 @@ class FacturaFormScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    
     final facturaFormProvider = Provider.of<FacturaFormProvider>(context);
     final factura = facturaFormProvider.factura;
     final Map<String, dynamic> myFormValues = {
@@ -37,10 +38,11 @@ class FacturaFormScreenBody extends StatelessWidget {
       'producto': factura.producto,
       // 'precio': factura.precio,
       //'cantidad': factura.cantidad,
-      //'archivado': factura.archivado,
+      'archivado': factura.archivado,
       'firma': factura.firma,
-      // 'total': factura.total,
+      // 'total': factura.total,r
     };
+    
     return Scaffold(
         appBar: AppBar(
           title: const Text('Factura Form'),
@@ -50,6 +52,7 @@ class FacturaFormScreenBody extends StatelessWidget {
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
             child: Form(
               key: facturaFormProvider.formKey,
+              
               child: Column(children: [
                 //CustomInputField(
                 //initialValue: factura.fecha.toString(),
@@ -58,6 +61,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                 //labelText: 'Fecha',
                 //autofocus: true,
                 //suffixIcon: Icons.date_range),
+                
                 CustomInputField(
                     initialValue: factura.cliente,
                     formProperty: 'cliente',
@@ -74,21 +78,24 @@ class FacturaFormScreenBody extends StatelessWidget {
                   hintText: 'Ingrese el producto',
                   suffixIcon: Icons.shopping_cart_checkout,
                 ),
-                // CustomInputField(
-                //   initialValue: factura.precio.toString(),
-                //   formProperty: 'precio',
-                //   formValues: myFormValues,
-                //   labelText: 'Precio',
-                //   suffixIcon: Icons.price_change_rounded,
-                //   keyboardType: TextInputType.emailAddress,
-                // ),
-                // CustomInputField(
-                //   initialValue: factura.cantidad.toString(),
-                //   formProperty: 'cantidad',
-                //   formValues: myFormValues,
-                //   labelText: 'Cantidad',
-                //   suffixIcon: Icons.add_circle,
-                // ),
+                CustomInputField(
+                  initialValue: factura.precio.toString(),
+                  formProperty: 'precio',
+                  formValues: myFormValues,
+                  labelText: 'Precio',
+                  suffixIcon: Icons.price_change_rounded,
+                  keyboardType: TextInputType.number,
+                  tipoRespuesta: 'double',
+                ),
+                CustomInputField(
+                  initialValue: factura.cantidad.toString(),
+                  formProperty: 'cantidad',
+                  formValues: myFormValues,
+                  labelText: 'Cantidad',
+                  suffixIcon: Icons.add_circle,
+                  keyboardType: TextInputType.number,
+                  tipoRespuesta: 'int',
+                ),
                 CustomInputField(
                   initialValue: factura.firma,
                   formProperty: 'firma',
@@ -96,31 +103,37 @@ class FacturaFormScreenBody extends StatelessWidget {
                   labelText: 'Firma',
                   suffixIcon: Icons.confirmation_number,
                 ),
-                // CustomInputField(
-                //   initialValue: factura.total.toString(),
-                //   formProperty: 'total',
-                //   formValues: myFormValues,
-                //   labelText: 'Total',
-                //   suffixIcon: Icons.scale,
-                // ),
-                DropdownButtonFormField<String>(
+                
+                CustomInputField(
+                  initialValue: factura.total.toString(),
+                  formProperty: 'total',
+                  formValues: myFormValues,
+                  labelText: 'Total',
+                  suffixIcon: Icons.scale,
+                  keyboardType: TextInputType.number,
+                  tipoRespuesta: 'double',
+                ),
+                DropdownButtonFormField<bool>(
                     items: const [
-                      DropdownMenuItem(value: 'True', child: Text('SI')),
-                      DropdownMenuItem(value: 'False', child: Text('NO')),
+                      DropdownMenuItem(value: true, child: Text('SI')),
+                      DropdownMenuItem(value: false, child: Text('NO')),
                     ],
                     onChanged: (value) {
-                      myFormValues['archivado'] = value ?? '';
+                      myFormValues['archivado'] = value;
+                      print(value);
                     }),
+                    
+                    
                 ElevatedButton.icon(
                   onPressed: () {
                     factura.id = myFormValues['id'] ?? '';
                     factura.cliente = myFormValues['cliente'] ?? '';
                     factura.producto = myFormValues['producto'] ?? '';
-                    //factura.precio = myFormValues['precio'] ?? 0;
-                    //factura.cantidad = myFormValues['cantidad'] ?? 0;
-                    //factura.archivado = myFormValues['archivado'] ?? '';
+                    factura.precio = myFormValues['precio'] ?? 0;
+                    factura.cantidad = myFormValues['cantidad'] ?? 0;
+                    factura.archivado = myFormValues['archivado'] ?? false;
                     factura.firma = myFormValues['firma'] ?? '';
-                    //factura.total = myFormValues['total'] ?? 0;
+                    factura.total = myFormValues['total'] ?? 0;
                     facturasProvider.saveOrUpdate(factura);
                     print(factura.id);
                   },

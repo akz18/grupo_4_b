@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:grupo_4_b/models/models.dart';
 import 'package:http/http.dart' as http;
@@ -61,7 +63,10 @@ class FacturasProvider extends ChangeNotifier {
 
   updateFactura(Factura factura) async {
     final url = Uri.http(_baseUrl, '/api/factura/update');
-    final response = await http.put(url, body: factura.toJson());
+    final response = await http.put(
+      url,
+      headers: {"Content-Type":"application/json"},
+     body: factura.toJson());
     print(factura.toJson());
   }
 

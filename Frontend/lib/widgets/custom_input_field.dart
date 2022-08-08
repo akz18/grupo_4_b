@@ -13,6 +13,7 @@ class CustomInputField extends StatelessWidget {
   final Map<String, dynamic> formValues;
   final String formProperty;
   final String? initialValue;
+  final String? tipoRespuesta;
 
   const CustomInputField({
     Key? key,
@@ -27,6 +28,7 @@ class CustomInputField extends StatelessWidget {
     required this.formValues,
     required this.formProperty,
     this.initialValue,
+    this.tipoRespuesta,
   }) : super(key: key);
 
   @override
@@ -37,7 +39,17 @@ class CustomInputField extends StatelessWidget {
       obscureText: obscureText ?? false,
       initialValue: initialValue,
       textCapitalization: TextCapitalization.words,
-      onChanged: (value) => formValues[formProperty] = value,
+      onChanged: (value)  {
+        if (tipoRespuesta == 'int'){
+           formValues[formProperty] = int.parse(value);
+        }
+        if (tipoRespuesta == 'double'){
+           formValues[formProperty] = double.parse(value);
+        }
+        if(tipoRespuesta ==null){
+           formValues[formProperty] = value;
+        }
+       },
       validator: (value) {
         if (value == null) {
           return 'Obligatorio';
