@@ -9,9 +9,8 @@ class FacturaFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
+    //final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
     final facturasProvider = Provider.of<FacturasProvider>(context);
-    print('hellow soy r');
     return ChangeNotifierProvider(
       create: (_) => FacturaFormProvider(facturasProvider.selectedFactura),
       child: FacturaFormScreenBody(
@@ -28,7 +27,6 @@ class FacturaFormScreenBody extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    
     final facturaFormProvider = Provider.of<FacturaFormProvider>(context);
     final factura = facturaFormProvider.factura;
     final Map<String, dynamic> myFormValues = {
@@ -36,13 +34,13 @@ class FacturaFormScreenBody extends StatelessWidget {
       'id': factura.id,
       'cliente': factura.cliente,
       'producto': factura.producto,
-      // 'precio': factura.precio,
-      //'cantidad': factura.cantidad,
+      'precio': factura.precio,
+      'cantidad': factura.cantidad,
       'archivado': factura.archivado,
       'firma': factura.firma,
-      // 'total': factura.total,r
+      'total': factura.total,
     };
-    
+
     return Scaffold(
         appBar: AppBar(
           title: const Text('Factura Form'),
@@ -50,9 +48,8 @@ class FacturaFormScreenBody extends StatelessWidget {
         body: SingleChildScrollView(
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 20),
+            key: facturaFormProvider.formKey,
             child: Form(
-              key: facturaFormProvider.formKey,
-              
               child: Column(children: [
                 //CustomInputField(
                 //initialValue: factura.fecha.toString(),
@@ -61,7 +58,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                 //labelText: 'Fecha',
                 //autofocus: true,
                 //suffixIcon: Icons.date_range),
-                
+
                 CustomInputField(
                     initialValue: factura.cliente,
                     formProperty: 'cliente',
@@ -103,7 +100,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                   labelText: 'Firma',
                   suffixIcon: Icons.confirmation_number,
                 ),
-                
+
                 CustomInputField(
                   initialValue: factura.total.toString(),
                   formProperty: 'total',
@@ -122,8 +119,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                       myFormValues['archivado'] = value;
                       print(value);
                     }),
-                    
-                    
+
                 ElevatedButton.icon(
                   onPressed: () {
                     factura.id = myFormValues['id'] ?? '';
@@ -136,6 +132,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                     factura.total = myFormValues['total'] ?? 0;
                     facturasProvider.saveOrUpdate(factura);
                     print(factura.id);
+                    Navigator.pushNamed(context, 'factura-list');
                   },
                   icon: const Icon(Icons.save),
                   label: const Text('Guardar'),

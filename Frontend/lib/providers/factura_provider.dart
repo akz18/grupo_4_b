@@ -12,10 +12,10 @@ class FacturasProvider extends ChangeNotifier {
     // fecha: DateTime(0),
     cliente: '',
     producto: '',
-    //precio: 0,
-    //cantidad: 0,
+    precio: 0,
+    cantidad: 0,
     archivado: true,
-    //total: 0,
+    total: 0,
   );
 
   late Factura selectedFactura;
@@ -63,10 +63,8 @@ class FacturasProvider extends ChangeNotifier {
 
   updateFactura(Factura factura) async {
     final url = Uri.http(_baseUrl, '/api/factura/update');
-    final response = await http.put(
-      url,
-      headers: {"Content-Type":"application/json"},
-     body: factura.toJson());
+    final response = await http.put(url,
+        headers: {"Content-Type": "application/json"}, body: factura.toJson());
     print(factura.toJson());
   }
 
