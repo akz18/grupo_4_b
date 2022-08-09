@@ -19,7 +19,7 @@ class AppRoutes {
     MenuOption(
         route: 'factura-form-create',
         icon: Icons.list,
-        name: 'Factura Form Create',
+        name: 'Factura Form',
         screen: const FacturaFormCreate()),
     MenuOption(
         route: 'factura-form',

@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:grupo_4_b/providers/providers.dart';
 import 'package:flutter/material.dart';
@@ -142,20 +143,46 @@ class FacturaFormCreateBody extends StatelessWidget {
                       ],
                     )),
                 ElevatedButton.icon(
-                  onPressed: () {
-                    factura.id = myFormValues['id'];
-                    factura.fecha = myFormValues['fecha'] ?? DateTime.now();
-                    factura.cliente = myFormValues['cliente'] ?? '';
-                    factura.producto = myFormValues['producto'] ?? '';
-                    factura.precio = myFormValues['precio'] ?? 0;
-                    factura.cantidad = myFormValues['cantidad'] ?? 0;
-                    factura.archivado = myFormValues['archivado'] ?? false;
-                    factura.firma = myFormValues['firma'] ?? '';
-                    factura.total = myFormValues['precio'] * myFormValues['cantidad'];
-                    facturasProvider.saveOrUpdate(factura);
-                    print(factura.id);
-                    Navigator.pushNamed(context, 'home');
-                  },
+                  onPressed: () 
+                   => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Se guardará la factura', textAlign: TextAlign.center),
+                      content: const Text('¿Desea Continuar?', textAlign: TextAlign.center),
+                      actions: <Widget>[
+                        //Align(alignment: Alignment.center),
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: Container(
+                          padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 10, right: 50),
+                          child: const Text('Cancel', style: TextStyle(color: Colors.yellow)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: () {
+                            factura.id = myFormValues['id'];
+                            factura.fecha = myFormValues['fecha'] ?? DateTime.now();
+                            factura.cliente = myFormValues['cliente'] ?? '';
+                            factura.producto = myFormValues['producto'] ?? '';
+                            factura.precio = myFormValues['precio'] ?? 0;
+                            factura.cantidad = myFormValues['cantidad'] ?? 0;
+                            factura.archivado = myFormValues['archivado'] ?? false;
+                            factura.firma = myFormValues['firma'] ?? '';
+                            factura.total = myFormValues['precio'] * myFormValues['cantidad'];
+                            facturasProvider.saveOrUpdate(factura);
+                            print(factura.id);
+                            Navigator.pushNamed(context, 'home');
+                          },
+                          child: Container(
+                          padding: const EdgeInsets.only(
+                          top: 10, bottom: 10, left: 10, right: 60),
+                          child: const Text('OK', style: TextStyle(color: Colors.yellow)),
+                           )
+                        ),
+                      ],
+                    ),
+                  ),
                   icon: const Icon(Icons.save, color: Colors.black),
                   label: const Text(
                     'Guardar',
