@@ -11,12 +11,37 @@ class FacturaFormScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     //final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
     final facturasProvider = Provider.of<FacturasProvider>(context);
-    return ChangeNotifierProvider(
+    try{
+      return ChangeNotifierProvider(
       create: (_) => FacturaFormProvider(facturasProvider.selectedFactura),
       child: FacturaFormScreenBody(
         facturasProvider: facturasProvider,
       ),
     );
+    } catch (e) {
+      return ChangeNotifierProvider(
+      create: (_) => FacturaFormProvider(facturasProvider.factura),
+      child: FacturaFormScreenBody(
+        facturasProvider: facturasProvider,
+      ),
+    );
+    }
+    /*if (facturasProvider.selectedFactura.id == null){
+    return ChangeNotifierProvider(
+      create: (_) => FacturaFormProvider(facturasProvider.factura),
+      child: FacturaFormScreenBody(
+        facturasProvider: facturasProvider,
+      ),
+    );
+    }
+    else {
+      return ChangeNotifierProvider(
+      create: (_) => FacturaFormProvider(facturasProvider.selectedFactura),
+      child: FacturaFormScreenBody(
+        facturasProvider: facturasProvider,
+      ),
+    );
+    }*/
   }
 }
 
@@ -30,8 +55,8 @@ class FacturaFormScreenBody extends StatelessWidget {
     final facturaFormProvider = Provider.of<FacturaFormProvider>(context);
     final factura = facturaFormProvider.factura;
     final Map<String, dynamic> myFormValues = {
-      'fecha': factura.fecha,
       'id': factura.id,
+      'fecha': factura.fecha,
       'cliente': factura.cliente,
       'producto': factura.producto,
       'precio': factura.precio,
@@ -140,7 +165,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                     )),
                 ElevatedButton.icon(
                   onPressed: () {
-                    factura.id = myFormValues['id'] ?? '';
+                    factura.id = myFormValues['id'];
                     factura.fecha = myFormValues['fecha'] ?? DateTime.now();
                     factura.cliente = myFormValues['cliente'] ?? '';
                     factura.producto = myFormValues['producto'] ?? '';

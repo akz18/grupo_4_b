@@ -59,7 +59,7 @@ class FacturasProvider extends ChangeNotifier {
 
   createFactura(Factura factura) async {
     final url = Uri.http(_baseUrl, '/api/factura/save');
-    final response = await http.put(url,
+    final response = await http.post(url,
         headers: {"Content-Type": "application/json"}, body: factura.toJson());
   }
 

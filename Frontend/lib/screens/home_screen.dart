@@ -45,7 +45,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
             separatorBuilder: (_, __) => const Divider(),
-            itemCount: menuOptions.length - 1),
+            itemCount: menuOptions.length),
       ),
       body: GridView.count(
         // Create a grid with 2 columns. If you change the scrollDirection to

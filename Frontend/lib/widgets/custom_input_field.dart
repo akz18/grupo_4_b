@@ -42,6 +42,7 @@ class CustomInputField extends StatelessWidget {
       onChanged: (value)  {
         if (tipoRespuesta == 'int'){
            formValues[formProperty] = int.parse(value);
+           print(value);
         }
         if (tipoRespuesta == 'double'){
            formValues[formProperty] = double.parse(value);
