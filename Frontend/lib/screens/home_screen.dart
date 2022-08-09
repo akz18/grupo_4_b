@@ -8,6 +8,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final menuOptions = AppRoutes.menuOptions;
+
     return Scaffold(
       appBar: AppBar(
           centerTitle: true,
@@ -45,7 +46,7 @@ class HomeScreen extends StatelessWidget {
                   },
                 ),
             separatorBuilder: (_, __) => const Divider(),
-            itemCount: menuOptions.length),
+            itemCount: menuOptions.length -1),
       ),
       body: GridView.count(
         // Create a grid with 2 columns. If you change the scrollDirection to

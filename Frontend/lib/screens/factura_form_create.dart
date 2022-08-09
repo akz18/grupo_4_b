@@ -1,29 +1,31 @@
 import 'package:flutter/material.dart';
+import 'package:grupo_4_b/providers/providers.dart';
+import 'package:flutter/material.dart';
 import 'package:grupo_4_b/models/factura.dart';
 import 'package:grupo_4_b/providers/providers.dart';
 import 'package:grupo_4_b/themes/theme.dart';
 import 'package:grupo_4_b/widgets/widgets.dart';
 import 'package:provider/provider.dart';
 
-class FacturaFormScreen extends StatelessWidget {
-  const FacturaFormScreen({Key? key}) : super(key: key);
+class FacturaFormCreate extends StatelessWidget {
+  const FacturaFormCreate({Key? key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     //final GlobalKey<FormState> myFormKey = GlobalKey<FormState>();
     final facturasProvider = Provider.of<FacturasProvider>(context);
     return ChangeNotifierProvider(
-      create: (_) => FacturaFormProvider(facturasProvider.selectedFactura),
-      child: FacturaFormScreenBody(
+      create: (_) => FacturaFormProvider(facturasProvider.factura),
+      child: FacturaFormCreateBody(
         facturasProvider: facturasProvider,
       ),
     );
   }
 }
 
-class FacturaFormScreenBody extends StatelessWidget {
+class FacturaFormCreateBody extends StatelessWidget {
   final FacturasProvider facturasProvider;
-  const FacturaFormScreenBody({Key? key, required this.facturasProvider})
+  const FacturaFormCreateBody({Key? key, required this.facturasProvider})
       : super(key: key);
 
   @override
@@ -152,7 +154,7 @@ class FacturaFormScreenBody extends StatelessWidget {
                     factura.total = myFormValues['precio'] * myFormValues['cantidad'];
                     facturasProvider.saveOrUpdate(factura);
                     print(factura.id);
-                    Navigator.pushNamed(context, 'factura-list');
+                    Navigator.pushNamed(context, 'home');
                   },
                   icon: const Icon(Icons.save, color: Colors.black),
                   label: const Text(
