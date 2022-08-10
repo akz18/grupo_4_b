@@ -71,12 +71,27 @@ class FacturaListScreen extends StatelessWidget {
                                   .toString(),
                               style: const TextStyle(
                                   color: Colors.black, fontSize: 15.0),
-                            )
+                            ),
                           ],
-                        ),
+                        ), 
                       ),
+                              
                     ]),
                   ),
+                  Container(
+                    padding: const EdgeInsets.only(right: 15, bottom: 10),
+                    alignment: AlignmentDirectional.topEnd,
+                    child:
+                    FadeInImage.assetNetwork(
+                              placeholder: 'https://www.nicepng.com/png/detail/352-3525485_invoice-comments-icono-factura.png',
+                              imageErrorBuilder: (context, ob, stack) => Image.asset('assets/images/factura1.jpg', height: 60, width: 60),
+                              image: ('${facturaProvider.facturas[index].firma}'),
+                              width: 60,
+                              height: 60,
+                              fit: BoxFit.cover,
+                              fadeInDuration: Duration(milliseconds: 1000),
+                          ),
+                          ),
                   Container(
                     padding: const EdgeInsets.only(right: 15, bottom: 10),
                     alignment: AlignmentDirectional.topEnd,
