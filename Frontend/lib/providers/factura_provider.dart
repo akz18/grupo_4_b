@@ -70,7 +70,11 @@ class FacturasProvider extends ChangeNotifier {
     print(factura.toJson());
   }
 
-  deleteUser() {}
+  deleteFactura(borrar) async {
+    final url = Uri.http(_baseUrl, '/api/factura/deleteById/${borrar}');
+    final response = await http.delete(url);
+    print(borrar.toJson());
+  }
 
   Future saveOrUpdate(Factura factura) async {
     if (factura.id == null) {

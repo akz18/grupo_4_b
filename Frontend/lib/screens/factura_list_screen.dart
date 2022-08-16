@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:grupo_4_b/providers/factura_provider.dart';
 import 'package:grupo_4_b/themes/theme.dart';
+import 'package:http/http.dart';
 import 'package:provider/provider.dart';
 
 class FacturaListScreen extends StatelessWidget {
@@ -111,6 +112,12 @@ class FacturaListScreen extends StatelessWidget {
                       ],
                     ),
                   ),
+                  Container(
+                  padding: const EdgeInsets.only(right: 15, bottom: 10),
+                  alignment: AlignmentDirectional.topEnd,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
                   ElevatedButton(
                       onPressed: () {
                         facturaProvider.selectedFactura =
@@ -119,13 +126,58 @@ class FacturaListScreen extends StatelessWidget {
                       },
                       child: Text(
                         "Visualizar",
-                        style: TextStyle(color: Colors.black, fontSize: 20.0),
+                        style: TextStyle(color: Colors.black, fontSize: 20.0)
                       ),
                       style: ButtonStyle(
                         backgroundColor: MaterialStateProperty.all<Color>(
                             const Color.fromARGB(255, 216, 250, 27)),
                       )),
-                ]),
+                      SizedBox(
+                          width: 20,
+                      ),
+                      ElevatedButton(
+                      onPressed: () 
+                   => showDialog<String>(
+                    context: context,
+                    builder: (BuildContext context) => AlertDialog(
+                      title: const Text('Se eliminará la factura', textAlign: TextAlign.center),
+                      content: const Text('¿Desea Continuar?', textAlign: TextAlign.center),
+                      actions: <Widget>[
+                        TextButton(
+                          onPressed: () => Navigator.pop(context, 'Cancel'),
+                          child: Container(
+                          padding: const EdgeInsets.only(
+                        top: 10, bottom: 10, left: 10, right: 50),
+                          child: const Text('Cancel', style: TextStyle(color: Colors.yellow)),
+                          )
+                        ),
+                        TextButton(
+                          onPressed: () {
+                        facturaProvider.deleteFactura(facturaProvider.facturas[index].id);
+                        Navigator.pushNamed(context, 'home');
+                      },
+
+                      child: Container(
+                          padding: const EdgeInsets.only(
+                          top: 10, bottom: 10, left: 10, right: 60),
+                          child: const Text('OK', style: TextStyle(color: Colors.yellow)),
+                           )
+                        ),
+                      ],
+                    ),
+                  ),
+                      child: Icon(
+                        Icons.delete_forever,
+                        color: Colors.black
+                      ),
+                      style: ButtonStyle(
+                        backgroundColor: MaterialStateProperty.all<Color>(
+                            Color.fromARGB(255, 226, 6, 6)),
+                      )),
+                      ],
+                      ),
+                      )
+                      ]),                
               ),
           separatorBuilder: (_, __) => const Divider(),
           itemCount: facturaProvider.facturas.length),
